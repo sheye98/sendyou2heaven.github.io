@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>hello world</title>
-      <link href="/2022/06/02/index/"/>
-      <url>/2022/06/02/index/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>8.goroutine&amp;channel</title>
       <link href="/2022/06/02/go_goroutine_channel/"/>
       <url>/2022/06/02/go_goroutine_channel/</url>
