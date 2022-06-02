@@ -22,30 +22,37 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="醉后不知天在水，满船清梦压星河">
-<meta property="og:type" content="website">
-<meta property="og:title" content="狗剩的小木屋">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="8.goroutine&amp;channel前言应用程序通常需要  图形化界面异步执行一部分代码，以提升交互体验 需要并发地执行以提升效率 服务端并发处理连接，提升响应速度和qps  这些功能都是通过并发实现地，在Go语言中，每一个并发的执行单元叫作一个goroutine，可以暂时理解为Java地线程Thread。语法非常简单，就是在调用需要异步执行的方法前加上go关键字： 12f()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.goroutine&amp;channel">
+<meta property="og:url" content="http://example.com/2022/06/02/go_goroutine_channel/index.html">
 <meta property="og:site_name" content="狗剩的小木屋">
-<meta property="og:description" content="醉后不知天在水，满船清梦压星河">
+<meta property="og:description" content="8.goroutine&amp;channel前言应用程序通常需要  图形化界面异步执行一部分代码，以提升交互体验 需要并发地执行以提升效率 服务端并发处理连接，提升响应速度和qps  这些功能都是通过并发实现地，在Go语言中，每一个并发的执行单元叫作一个goroutine，可以暂时理解为Java地线程Thread。语法非常简单，就是在调用需要异步执行的方法前加上go关键字： 12f()">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200522164430107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhcmFmaW5hNTI3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200522175435457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhcmFmaW5hNTI3,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-06-02T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T05:56:43.631Z">
 <meta property="article:author" content="李狗剩">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="gopl">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200522164430107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhcmFmaW5hNTI3,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/06/02/go_goroutine_channel/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>狗剩的小木屋</title>
+  <title>8.goroutine&channel | 狗剩的小木屋</title>
   
 
 
@@ -186,67 +193,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/02/index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="李狗剩">
-      <meta itemprop="description" content="醉后不知天在水，满船清梦压星河">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗剩的小木屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/02/index/" class="post-title-link" itemprop="url">hello world</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-06-02 13:37:53 / 修改时间：13:55:17" itemprop="dateCreated datePublished" datetime="2022-06-02T13:37:53+08:00">2022-06-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -262,10 +212,9 @@
       <meta itemprop="name" content="狗剩的小木屋">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/02/go_goroutine_channel/" class="post-title-link" itemprop="url">8.goroutine&channel</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          8.goroutine&channel
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -288,6 +237,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -298,7 +254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
+        <span id="more"></span>
 
 <h1 id="8-goroutine-amp-channel"><a href="#8-goroutine-amp-channel" class="headerlink" title="8.goroutine&amp;channel"></a>8.goroutine&amp;channel</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>应用程序通常需要</p>
 <ol>
@@ -406,27 +362,62 @@
 <p>但是如果我们想要退出两个或者任意多个goroutine怎么办呢？一对多广播</p>
 <p>关闭了一个channel并且被消费掉了所有已发送的值，接收操作会产生零值。我们可以将这个机制扩展一下，来作为我们的广播机制：不要向channel发送值，而是用关闭一个channel来进行广播</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">cancelled</span><span class="params">()</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> &lt;-done:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    os.Stdin.Read(<span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">1</span>)) <span class="comment">// read a single byte</span></span><br><span class="line">    <span class="built_in">close</span>(done)<span class="comment">// 关闭通道，实现广播，所有cancel方法进入第一个case，不再阻塞</span></span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李狗剩
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/06/02/go_goroutine_channel/" title="8.goroutine&amp;channel">http://example.com/2022/06/02/go_goroutine_channel/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/go/" rel="tag"># go</a>
+              <a href="/tags/gopl/" rel="tag"># gopl</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/02/index/" rel="next" title="hello world">
+      hello world <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
 
 
-  
-
-
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjUyNS8zMjk4OA=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -473,6 +464,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#8-goroutine-amp-channel"><span class="nav-number">1.</span> <span class="nav-text">8.goroutine&amp;channel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-goroutine"><span class="nav-number">3.</span> <span class="nav-text">1.goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BA%A4%E4%BA%92%E4%BD%93%E9%AA%8C"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 交互体验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 服务端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Channels"><span class="nav-number">4.</span> <span class="nav-text">2.Channels</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0-%E6%9C%80%E7%AE%80%E6%98%93%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">2.0 最简易用法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%97%A0%E7%BC%93%E5%AD%98channel-amp-%E5%90%8C%E6%AD%A5"><span class="nav-number">4.2.</span> <span class="nav-text">2.1 无缓存channel &amp; 同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%B8%B2%E8%81%94%E7%9A%84Channels%EF%BC%88pipeline%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">2.2 串联的Channels（pipeline）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%8D%95%E5%90%91channel"><span class="nav-number">4.4.</span> <span class="nav-text">2.3 单向channel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%B8%A6%E7%BC%93%E5%AD%98buffer%E7%9A%84Channel"><span class="nav-number">4.5.</span> <span class="nav-text">2.4 带缓存buffer的Channel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%B9%B6%E5%8F%91%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.6.</span> <span class="nav-text">2.5 并发的循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-join%E7%AD%89%E5%BE%85"><span class="nav-number">4.7.</span> <span class="nav-text">2.6 join等待</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1%E8%AE%A1%E6%95%B0sync-WaitGroup"><span class="nav-number">4.7.1.</span> <span class="nav-text">2.6.1计数sync.WaitGroup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-chennel%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-number">4.7.2.</span> <span class="nav-text">2.6.2 chennel信号量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-select%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">4.8.</span> <span class="nav-text">2.7 select多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-goroutine%E9%80%80%E5%87%BA"><span class="nav-number">4.9.</span> <span class="nav-text">2.8 goroutine退出</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -658,6 +650,21 @@ $(document).ready(function() {
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
